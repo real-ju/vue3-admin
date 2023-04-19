@@ -50,7 +50,8 @@
 
 ### 全局组件注册
 
-需要在 components/registerGlobComp 中手动注册
+- 需要在 components/registerGlobComp 中手动注册
+- 引入 antd 组件也要在 design 中引入组件的样式文件
 
 ### 关于引用 Ant Design 中的资源路径
 
