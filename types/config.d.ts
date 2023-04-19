@@ -3,7 +3,6 @@ import { MenuModeEnum } from '/@/enums/layoutEnum';
 
 export interface ProjectSetting {
   routePermissionMode: RoutePermissionModeEnum;
-  multiplePlatformMode: boolean;
   showPageTitleSuffix: boolean;
   authSystemPlatCode: string;
   iconfontUrl: string;
