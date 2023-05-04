@@ -18,6 +18,6 @@ declare module 'vue-router' {
     allowTabControl?: boolean;
 
     // 路由缓存
-    keepAlive?: boolean;
+    cache?: boolean;
   }
 }

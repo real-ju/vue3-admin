@@ -13,7 +13,8 @@ export const useLayoutStore = defineStore({
     menuTree: [],
     selectedMenuKeyPath: [],
     pageTabs: [],
-    currentTabIndex: -1
+    currentTabIndex: -1,
+    willClearCacheRoute: new Set()
   }),
   getters: {
     currentTopMenuKey(state): string {
@@ -27,6 +28,9 @@ export const useLayoutStore = defineStore({
     }
   },
   actions: {
+    clearRouteCache(fullPath: string) {
+      this.willClearCacheRoute.add(fullPath);
+    },
     updateSelectedMenuKeyPath(route: RouteLocationNormalized) {
       let matchKey: any = route.meta.menuMatchKey;
       if (!matchKey) {
@@ -56,6 +60,7 @@ export const useLayoutStore = defineStore({
       }
     },
     closePageTab(key: string) {
+      this.clearRouteCache(key);
       const tabIndex = this.pageTabs.findIndex((item: TabInfo) => {
         return item.route === key;
       });

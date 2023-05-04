@@ -110,7 +110,7 @@ import { useUserStore } from '/@/store/modules/user';
 import { MenuModeEnum } from '/@/enums/layoutEnum';
 import { getEnv } from '/@/utils/env';
 import { goMenuFirstLeafNode } from '/@/logics/helper/layout';
-import AliveRouterView from '../alive-router-view/index.vue';
+import AliveRouterView from '../aliveRouterView/index.vue';
 import { Modal } from 'ant-design-vue/es';
 import { logout } from '/@/api/auth';
 import { BasicPageEnum } from '/@/enums/pageEnum';
