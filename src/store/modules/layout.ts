@@ -13,7 +13,8 @@ export const useLayoutStore = defineStore({
     menuTree: [],
     selectedMenuKeyPath: [],
     pageTabs: [],
-    currentTabIndex: -1
+    currentTabIndex: -1,
+    willClearCacheRoute: new Set()
   }),
   getters: {
     currentTopMenuKey(state): string {
@@ -27,6 +28,16 @@ export const useLayoutStore = defineStore({
     }
   },
   actions: {
+    clearRouteCache(fullPath: string) {
+      this.willClearCacheRoute.add(fullPath);
+    },
+    restoreRouteCache(route: RouteLocationNormalized) {
+      if (route.meta.cache !== false) {
+        if (this.willClearCacheRoute.has(route.fullPath)) {
+          this.willClearCacheRoute.delete(route.fullPath);
+        }
+      }
+    },
     updateSelectedMenuKeyPath(route: RouteLocationNormalized) {
       let matchKey: any = route.meta.menuMatchKey;
       if (!matchKey) {
@@ -50,7 +61,8 @@ export const useLayoutStore = defineStore({
       } else {
         this.pageTabs.push({
           route: fullPath,
-          title: route.meta.title
+          title: route.meta.title,
+          cache: route.meta.cache || true
         });
         this.currentTabIndex = this.pageTabs.length - 1;
       }
@@ -60,6 +72,11 @@ export const useLayoutStore = defineStore({
         return item.route === key;
       });
       if (tabIndex !== -1) {
+        // 关闭页签后，清除路由缓存
+        const removeTab = this.pageTabs[tabIndex];
+        if (removeTab.cache) {
+          this.clearRouteCache(key);
+        }
         this.pageTabs.splice(tabIndex, 1);
         // 关闭了最后一个Tab（一般页面上控制至少保留一个）
         if (this.pageTabs.length === 0) {
@@ -108,7 +125,8 @@ export const useLayoutStore = defineStore({
       if (tabIndex === -1) {
         this.pageTabs.push({
           route: fullPath,
-          title
+          title,
+          cache: route.meta.cache || true
         });
         this.currentTabIndex = this.pageTabs.length - 1;
       } else {

@@ -67,7 +67,7 @@
   </div>
 </template>
 
-<script setup lang="ts" name="LAuth">
+<script setup lang="ts" name="VLogin">
 import { getCaptcha, login, getRsaPublicKey } from '/@/api/auth';
 import { LoginParams } from '/#/api/auth';
 import { message, notification, Button } from 'ant-design-vue/es';

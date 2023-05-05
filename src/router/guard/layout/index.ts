@@ -15,6 +15,9 @@ export function createLayoutGuard(router: Router) {
     // 更新页签
     layoutStore.updatePageTabs(to);
 
+    // 恢复路由缓存
+    layoutStore.restoreRouteCache(to);
+
     // 加载进度条
     NProgress.done();
   });

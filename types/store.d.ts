@@ -33,11 +33,14 @@ export interface LayoutState {
   selectedMenuKeyPath: string[];
   pageTabs: TabInfo[];
   currentTabIndex: number;
+  // 将要清除缓存的路由fullPath
+  willClearCacheRoute: Set<string>;
 }
 
 export interface TabInfo {
   route: string;
   title: string;
+  cache: boolean;
 }
 
 export type MenuTree = MenuItem[];
