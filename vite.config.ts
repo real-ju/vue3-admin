@@ -1,7 +1,7 @@
 import type { UserConfig, ConfigEnv } from 'vite';
 import { loadEnv } from 'vite';
-import { createVitePlugins } from './build/vite/plugin';
-import { wrapEnv, pathResolve } from './build/utils';
+import { createVitePlugins } from './construct/vite/plugin';
+import { wrapEnv, pathResolve } from './construct/utils';
 
 // https://vitejs.dev/config/
 export default ({ mode }: ConfigEnv): UserConfig => {
@@ -48,7 +48,7 @@ export default ({ mode }: ConfigEnv): UserConfig => {
       }
     },
     build: {
-      outDir: 'dist' + viteEnv.VITE_PUBLIC_PATH,
+      outDir: 'build/dist' + viteEnv.VITE_PUBLIC_PATH,
       sourcemap: mode === 'development'
     }
   };
