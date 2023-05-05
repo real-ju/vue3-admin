@@ -8,7 +8,7 @@ const setting: ProjectSetting = {
   // 网页标题后缀
   showPageTitleSuffix: true,
   // 统一权限平台标识
-  authSystemPlatCode: 'customs-check',
+  authSystemPlatCode: 'vue3-admin',
   // 使用IconFont的图标配置
   iconfontUrl: 'https://at.alicdn.com/t/c/font_3373343_xic7ab2dkh9.js'
 };

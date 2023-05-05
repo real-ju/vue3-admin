@@ -1,16 +1,7 @@
 <template>
-  <div class="basic-page">
-    {{ num }}
-    <a-button @click="add">测试</a-button>
-  </div>
+  <div class="basic-page">TEST</div>
 </template>
 
-<script setup lang="ts" name="VTest1">
-const num = ref(1);
-
-const add = () => {
-  num.value++;
-};
-</script>
+<script setup lang="ts" name="VTest"></script>
 
 <style></style>
