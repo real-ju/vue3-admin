@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia';
+import { usePermissionStore } from './permission';
 
 import type { UserState } from '/#/store';
 
@@ -43,6 +44,10 @@ export const useUserStore = defineStore({
       this.isLogin = true;
     },
     logout() {
+      // 清理权限信息
+      const permissionStore = usePermissionStore();
+      permissionStore.clearPermissions();
+
       // 清理用户信息
       this.userInfo = null;
       this.userRoles = [];

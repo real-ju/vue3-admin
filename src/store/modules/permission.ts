@@ -74,6 +74,7 @@ function generateMenuItem(perNode: PerTreeNode, children?: MenuTree): MenuItem {
 export const usePermissionStore = defineStore({
   id: 'permission',
   state: (): PermissionState => ({
+    hasFetchedPermissionData: false,
     routePermissions: [],
     actionPermissions: []
   }),
@@ -89,6 +90,11 @@ export const usePermissionStore = defineStore({
       this.actionPermissions = actionPermissions;
       const layoutStore = useLayoutStore();
       layoutStore.menuTree = menuTree;
+    },
+    clearPermissions() {
+      this.routePermissions = [];
+      this.actionPermissions = [];
+      this.hasFetchedPermissionData = false;
     }
   }
 });

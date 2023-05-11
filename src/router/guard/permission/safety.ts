@@ -21,8 +21,6 @@ const routeWhiteList: (ExceptionPageEnum | string)[] = [
 ];
 
 export function createSafetyPermissionGuard(router: Router) {
-  let isFetchUserInfo = false;
-
   router.beforeEach((to, from, next) => {
     const isMatched = to.matched.length !== 0;
     if (!isMatched) {
@@ -39,7 +37,7 @@ export function createSafetyPermissionGuard(router: Router) {
     const isLogin = userStore.isLogin;
     // const isLogin = true;
     if (isLogin) {
-      if (!isFetchUserInfo) {
+      if (!permissionStore.hasFetchedPermissionData) {
         getUserInfo()
           .then((res) => {
             const applications = res.data.applications;
@@ -63,7 +61,7 @@ export function createSafetyPermissionGuard(router: Router) {
               .then((res) => {
                 const roles = res.data;
                 userStore.userRoles = roles;
-                isFetchUserInfo = true;
+                permissionStore.hasFetchedPermissionData = true;
                 next(to);
               })
               .catch(() => {

@@ -12,6 +12,7 @@ export interface UserState {
 
 /* permission module */
 export interface PermissionState {
+  hasFetchedPermissionData: boolean,
   routePermissions: string[];
   actionPermissions: string[];
 }
