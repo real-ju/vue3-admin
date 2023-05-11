@@ -111,8 +111,9 @@ export class Requester {
           const statusCode = error.response.status;
           if (statusCode === 401) {
             const userStore = useUserStore();
-            userStore.logout();
-            router.push(BasicPageEnum.LOGIN);
+            userStore.logout().then(() => {
+              router.push(BasicPageEnum.LOGIN);
+            });
           }
 
           this.handleCustomError(error.response);

@@ -17,7 +17,7 @@ const auth: RouteRecordRaw = {
       path: 'login',
       name: 'auth-login',
       meta: {
-        title: '登陆'
+        title: '登录'
       },
       component: asyncViewImport('auth/login.vue')
     }

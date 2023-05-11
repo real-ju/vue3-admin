@@ -112,7 +112,6 @@ import { getEnv } from '/@/utils/env';
 import { goMenuFirstLeafNode } from '/@/logics/helper/layout';
 import AliveRouterView from '../aliveRouterView/index.vue';
 import { Modal } from 'ant-design-vue/es';
-import { logout } from '/@/api/auth';
 import { BasicPageEnum } from '/@/enums/pageEnum';
 import OrganizationSelect from './header/OrganizationSelect/index.vue';
 
@@ -163,8 +162,7 @@ const handleLogout = () => {
     title: '提示',
     content: '您确定要注销吗？',
     onOk: () => {
-      logout().then(() => {
-        userStore.logout();
+      userStore.logout().then(() => {
         router.push(BasicPageEnum.LOGIN);
       });
     }

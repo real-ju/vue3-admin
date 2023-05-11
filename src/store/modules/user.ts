@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import { usePermissionStore } from './permission';
+import { logout } from '/@/api/auth';
 
 import type { UserState } from '/#/store';
 
@@ -43,7 +44,9 @@ export const useUserStore = defineStore({
       this.token = token;
       this.isLogin = true;
     },
-    logout() {
+    async logout() {
+      await logout();
+      
       // 清理权限信息
       const permissionStore = usePermissionStore();
       permissionStore.clearPermissions();
