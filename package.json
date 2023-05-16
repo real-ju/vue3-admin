@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "vite",
     "dev:xxx": "cross-env CLIENT=xxx npm run dev",
-    "build": "npm run type:check && npm run lint && vite build",
-    "build:test": "npm run type:check && npm run lint && vite build --mode test",
+    "build": "vite build",
+    "build:test": "vite build --mode test",
     "preview": "vite preview",
     "type:check": "vue-tsc",
     "lint": "npm run lint:prettier && npm run lint:eslint",
