@@ -1,11 +1,18 @@
 import type { Router } from 'vue-router';
 
+import { BasicPageEnum } from '/@/enums/pageEnum';
 import { setPageTitle } from '/@/router/helper/routeHelper';
 import { useLayoutStore } from '/@/store/modules/layout';
 import NProgress from 'nprogress';
 
 export function createLayoutGuard(router: Router) {
   router.afterEach((to, from, failure) => {
+    // 刷新路由
+    if (to.path === BasicPageEnum.REFRESH) {
+      router.replace(from.fullPath);
+      return false;
+    }
+
     // 设置页面标题
     setPageTitle(to.meta.title);
 
