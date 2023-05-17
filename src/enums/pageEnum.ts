@@ -5,7 +5,9 @@ export enum BasicPageEnum {
   // 登录
   LOGIN = '/auth/login',
   // 首页
-  HOME = '/dashboard'
+  HOME = '/dashboard',
+  // 刷新路由
+  REFRESH = '/refresh'
 }
 
 /**

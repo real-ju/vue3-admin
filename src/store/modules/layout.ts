@@ -2,6 +2,7 @@ import { defineStore } from 'pinia';
 import layoutSetting from '/@/settings/layoutSetting';
 import { generateMenuKeyPath } from '/@/logics/helper/layout';
 import { router } from '/@/router';
+import { BasicPageEnum } from '/@/enums/pageEnum';
 
 import type { LayoutState, TabInfo } from '/#/store';
 import type { RouteLocationNormalized } from 'vue-router';
@@ -28,6 +29,12 @@ export const useLayoutStore = defineStore({
     }
   },
   actions: {
+    refreshPage(route: RouteLocationNormalized) {
+      if (route.meta.cache !== false) {
+        this.clearRouteCache(route.fullPath);
+      }
+      router.replace(BasicPageEnum.REFRESH);
+    },
     clearRouteCache(fullPath: string) {
       this.willClearCacheRoute.add(fullPath);
     },

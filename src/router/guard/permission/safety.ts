@@ -15,9 +15,10 @@ function checkRoutePermission(to: RouteLocationNormalized) {
   return permissionStore.routePermissions.indexOf(String(to.name)) !== -1;
 }
 
-const routeWhiteList: (ExceptionPageEnum | string)[] = [
+const routeWhiteList: string[] = [
   ExceptionPageEnum.EXCEPTION_403,
-  ExceptionPageEnum.EXCEPTION_404
+  ExceptionPageEnum.EXCEPTION_404,
+  BasicPageEnum.REFRESH
 ];
 
 export function createSafetyPermissionGuard(router: Router) {

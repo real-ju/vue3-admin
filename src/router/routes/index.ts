@@ -13,13 +13,25 @@ Object.keys(modules).forEach((key) => {
   routeRecordList.push(...modList);
 });
 
-const rootRoute: RouteRecordRaw | any = {
+const rootRoute: RouteRecordRaw = {
   path: '/',
   name: 'root',
   // redirect: BasicPageEnum.HOME,
   meta: {
     title: 'Root',
     public: false
-  }
+  },
+  component: {}
 };
-export default [rootRoute, ...routeRecordList];
+
+const refreshRoute: RouteRecordRaw = {
+  path: '/refresh',
+  name: 'refresh',
+  meta: {
+    title: 'Refresh',
+    public: false
+  },
+  component: {}
+};
+
+export default [rootRoute, refreshRoute, ...routeRecordList];
