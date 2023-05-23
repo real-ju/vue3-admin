@@ -15,7 +15,7 @@ export const useLayoutStore = defineStore({
     selectedMenuKeyPath: [],
     pageTabs: [],
     currentTabIndex: -1,
-    willClearCacheRoute: new Set()
+    cachedRoutes: new Set()
   }),
   getters: {
     currentTopMenuKey(state): string {
@@ -35,14 +35,14 @@ export const useLayoutStore = defineStore({
       }
       router.replace(BasicPageEnum.REFRESH);
     },
-    clearRouteCache(fullPath: string) {
-      this.willClearCacheRoute.add(fullPath);
-    },
-    restoreRouteCache(route: RouteLocationNormalized) {
+    updateCachedRoutes(route: RouteLocationNormalized) {
       if (route.meta.cache !== false) {
-        if (this.willClearCacheRoute.has(route.fullPath)) {
-          this.willClearCacheRoute.delete(route.fullPath);
-        }
+        this.cachedRoutes.add(route.fullPath);
+      }
+    },
+    clearRouteCache(fullPath: string) {
+      if (this.cachedRoutes.has(fullPath)) {
+        this.cachedRoutes.delete(fullPath);
       }
     },
     updateSelectedMenuKeyPath(route: RouteLocationNormalized) {

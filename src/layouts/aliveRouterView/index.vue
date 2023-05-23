@@ -1,8 +1,10 @@
 <template>
   <router-view v-slot="{ Component, route }">
-    <component v-if="route.meta.cache === false" :is="Component" :key="route.fullPath" />
-    <keep-alive v-else :exclude="cacheExclude">
-      <component :is="warpRouteComponent(Component, route)" :key="route.fullPath" />
+    <keep-alive :exclude="cacheInclude">
+      <component
+        :is="route.meta.cache === false ? Component : warpRouteComponent(Component, route)"
+        :key="route.fullPath"
+      />
     </keep-alive>
   </router-view>
 </template>
@@ -36,8 +38,8 @@ const warpRouteComponent = (component: VNode, route: RouteLocationNormalizedLoad
 
 const layoutStore = useLayoutStore();
 
-const cacheExclude = computed(() => {
-  const routeArr = Array.from(layoutStore.willClearCacheRoute);
+const cacheInclude = computed(() => {
+  const routeArr = Array.from(layoutStore.cachedRoutes);
   return routeArr.map((fullPath) => {
     return 'RouteCacheComponent_' + fullPath;
   });
