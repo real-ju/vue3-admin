@@ -2,6 +2,7 @@ import type { UserConfig, ConfigEnv } from 'vite';
 import { loadEnv } from 'vite';
 import { createVitePlugins } from './construct/vite/plugin';
 import { wrapEnv, pathResolve } from './construct/utils';
+import { FILES_USE_GLOBAL_THEME_VAR } from './construct/constant';
 
 // https://vitejs.dev/config/
 export default ({ mode }: ConfigEnv): UserConfig => {
@@ -43,7 +44,16 @@ export default ({ mode }: ConfigEnv): UserConfig => {
     css: {
       preprocessorOptions: {
         less: {
-          javascriptEnabled: true
+          javascriptEnabled: true,
+          additionalData: (content: string, filePath: string) => {
+            const path = FILES_USE_GLOBAL_THEME_VAR.find((item: string) => {
+              return filePath.includes(item);
+            });
+            if (path) {
+              return "@import '/@/design/theme/default/global.less';" + content;
+            }
+            return content;
+          }
         }
       }
     },
