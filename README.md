@@ -68,7 +68,7 @@
 ### 主题
 
 - 组件库主题：design/theme/xxx/antd 中定义组件库 less 变量覆盖默认变量
-- 其他全局主题：design/theme/xxx/global 中定义 less 变量，在需要的地方引用该文件
+- 其他全局主题：design/theme/xxx/global 中定义 less 变量，在 construct/constant -> FILES_USE_GLOBAL_THEME_VAR 中添加需要引用全局主题变量的文件路径
 
 ### 一些特殊文件夹含义
 
